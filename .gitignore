@@ -1,0 +1,60 @@
+# ─────────────────────────────────────────────────────────
+# DATOS — nunca subir al repo
+# ─────────────────────────────────────────────────────────
+data/raw/
+data/parquet/
+data/clean/
+data/final/
+data/.ipynb_checkpoints/
+
+# ─────────────────────────────────────────────────────────
+# MODELOS ENTRENADOS — demasiado grandes para GitHub
+# (opcional: usar Git LFS o enlace de descarga externo)
+# ─────────────────────────────────────────────────────────
+models/best_random_forest/
+models/best_gbt_ovr/
+
+# ─────────────────────────────────────────────────────────
+# SPARK — archivos temporales de ejecución
+# ─────────────────────────────────────────────────────────
+spark_tmp/
+
+# ─────────────────────────────────────────────────────────
+# LOGS — los .err de SLURM son muy pesados (72 MB / 2,5 MB)
+# Solo se conservan los .json de métricas y los .log limpios
+# ─────────────────────────────────────────────────────────
+logs/*.err
+
+# ─────────────────────────────────────────────────────────
+# PYTHON
+# ─────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# ─────────────────────────────────────────────────────────
+# JUPYTER
+# ─────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ─────────────────────────────────────────────────────────
+# ENTORNOS VIRTUALES
+# ─────────────────────────────────────────────────────────
+.env
+.venv
+venv/
+env/
+
+# ─────────────────────────────────────────────────────────
+# SISTEMA
+# ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

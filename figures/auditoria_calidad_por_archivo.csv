@@ -1,0 +1,11 @@
+source_file,total_filas,labels_validos,labels_invalidos,pct_corrupcion
+Thursday-01-03-2018_TrafficForML_CICFlowMeter.csv,331125,331100,25,0.01
+Wednesday-28-02-2018_TrafficForML_CICFlowMeter.csv,613104,613071,33,0.01
+Friday-02-03-2018_TrafficForML_CICFlowMeter.csv,1048575,1048575,0,0.0
+Friday-16-02-2018_TrafficForML_CICFlowMeter.csv,1048575,1048574,1,0.0
+Friday-23-02-2018_TrafficForML_CICFlowMeter.csv,1048575,1048575,0,0.0
+Thuesday-20-02-2018_TrafficForML_CICFlowMeter-002.csv,7948748,7948748,0,0.0
+Thursday-15-02-2018_TrafficForML_CICFlowMeter.csv,1048575,1048575,0,0.0
+Thursday-22-02-2018_TrafficForML_CICFlowMeter.csv,1048575,1048575,0,0.0
+Wednesday-14-02-2018_TrafficForML_CICFlowMeter.csv,1048575,1048575,0,0.0
+Wednesday-21-02-2018_TrafficForML_CICFlowMeter.csv,1048575,1048575,0,0.0

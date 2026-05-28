@@ -1,0 +1,130 @@
+=========================================
+Job ID: 296
+Nodo:   eespcachcpro01
+Inicio: Fri May 15 02:38:59 PM CEST 2026
+=========================================
+📊 Configuración del nodo:
+   Nodo: eespcachcpro01
+   CPU:  Intel Xeon Gold 6338 (32c / 64t)
+   RAM:  125 GB
+   Modelo: GBT OVR Best
+   Params: {'maxIter': 100, 'maxDepth': 8, 'stepSize': 0.1}
+
+🔧 Preparando datos (pipeline completo NB5)...
+  ✅ Pipeline completado:
+     Train balanceado: 494,658 filas
+     Test:             3,141,740 filas
+     Guardados en parquet temporal
+  🛑 SparkSession detenida
+
+🔍 Escalabilidad por volumen (64 hilos)...
+
+     10%:     49,580 muestras | 3605.7s | F1=0.9538
+     25%:    123,652 muestras | 4195.9s | F1=0.9592
+     50%:    247,167 muestras | 4459.3s | F1=0.9591
+     75%:    371,095 muestras | 4674.0s | F1=0.9589
+    100%:    494,658 muestras | 4798.2s | F1=0.9591
+
+✅ SparkSession detenida
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/42_tiempo_vs_volumen.png
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/43_f1_vs_volumen.png
+
+🔍 Escalabilidad por grado de paralelismo (Strong Scaling)...
+
+   CPU:     Intel Xeon Gold 6338
+   Cores:   32 físicos / 64 hilos
+   Dataset: 100% train balanceado (494,658 filas)
+   Modelo:  GBT OVR Best
+
+  ▶ local[8] — 8 hilos...
+    Tiempo: 3601.7s | F1: 0.9599
+  ▶ local[16] — 16 hilos...
+    Tiempo: 3237.4s | F1: 0.9599
+  ▶ local[32] — 32 hilos...
+    Tiempo: 3585.3s | F1: 0.9598
+  ▶ local[64] — 64 hilos...
+    Tiempo: 5092.4s | F1: 0.9591
+
+📊 Resultados:
+ n_threads  time_s     f1
+         8 3601.69 0.9599
+        16 3237.42 0.9599
+        32 3585.29 0.9598
+        64 5092.40 0.9591
+
+📊 Speedup y Eficiencia (base = 8 hilos):
+
+ n_threads  time_s     f1  speedup  n_factor  speedup_ideal  efficiency
+         8 3601.69 0.9599 1.000000       1.0            1.0      100.00
+        16 3237.42 0.9599 1.112519       2.0            2.0       55.63
+        32 3585.29 0.9598 1.004574       4.0            4.0       25.11
+        64 5092.40 0.9591 0.707268       8.0            8.0        8.84
+
+📐 Estimación de Amdahl (basada en mejor speedup):
+   Mejor speedup: 1.11× con 16 hilos
+   Fracción paralelizable (p): 0.2023 (20.2%)
+   Fracción secuencial (α):    0.7977 (79.8%)
+   Speedup máximo teórico:     1.25×
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/44_tiempo_vs_hilos.png
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/45_speedup_vs_hilos.png
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/46_eficiencia_paralela.png
+
+💾 Métricas guardadas en /home/hpc/22231088student/tfg_ids/logs/nb7_metrics.json
+  🗑️ Eliminado: /home/hpc/22231088student/tfg_ids/data/final/_temp_nb7_train
+  🗑️ Eliminado: /home/hpc/22231088student/tfg_ids/data/final/_temp_nb7_test
+
+======================================================================
+📋 RESUMEN DE ESCALABILIDAD — NB7 (GBT OVR Best)
+======================================================================
+
+  Nodo: eespcachcpro01
+  CPU:  Intel Xeon Gold 6338 (32c / 64t)
+  RAM:  125 GB
+  Modelo: GBT OVR Best (maxIter=100, maxDepth=8, stepSize=0.1)
+
+--- ESCALABILIDAD POR VOLUMEN (64 hilos) ---
+
+ frac      n  time_s     f1
+ 0.10  49580 3605.66 0.9538
+ 0.25 123652 4195.90 0.9592
+ 0.50 247167 4459.26 0.9591
+ 0.75 371095 4674.02 0.9589
+ 1.00 494658 4798.19 0.9591
+
+--- ESCALABILIDAD POR PARALELISMO (Strong Scaling) ---
+
+ n_threads  time_s     f1  speedup  efficiency
+         8 3601.69 0.9599 1.000000      100.00
+        16 3237.42 0.9599 1.112519       55.63
+        32 3585.29 0.9598 1.004574       25.11
+        64 5092.40 0.9591 0.707268        8.84
+
+📝 CONCLUSIONES:
+
+
+1. VOLUMEN: Al multiplicar los datos ×10 (del 10% al 100%),
+   el tiempo crece ×1.3. Crecimiento sublineal ✅.
+
+
+2. PARALELISMO: Punto óptimo en 16 hilos (speedup 1.11×,
+   eficiencia 56%).
+
+
+3. F1-SCORE: El rendimiento se estabiliza a partir del 10% del dataset.
+   Diferencia entre 75% y 100%: 0.0002 puntos F1.
+
+
+4. TIPO DE ANÁLISIS: Strong scaling (escalado vertical) dentro de un nodo
+   Intel Xeon Gold 6338 con hasta 64 hilos.
+
+
+5. MODELO: GBT OVR Best — el mejor modelo obtenido en NB5 (F1=0.9601 en test).
+
+======================================================================
+✅ NB7 COMPLETADO
+======================================================================
+
+🛑 SparkSession cerrada
+=========================================
+Fin: Sat May 16 01:19:19 AM CEST 2026
+=========================================

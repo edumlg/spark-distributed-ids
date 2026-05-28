@@ -1,0 +1,156 @@
+=========================================
+Job ID: 314
+Nodo:   eespcachcpro01
+Inicio: Sat May 16 12:11:11 PM CEST 2026
+=========================================
+======================================================================
+📊 NB7 — Escalabilidad: RF vs GBT OVR Best
+======================================================================
+  Nodo: eespcachcpro01
+  CPU:  Intel Xeon Gold 6338 (32c / 64t)
+  RAM:  125 GB
+  RF:   {'numTrees': 200, 'maxDepth': 10, 'featureSubsetStrategy': 'sqrt', 'maxBins': 16}
+  GBT:  {'maxIter': 100, 'maxDepth': 8, 'stepSize': 0.1}
+======================================================================
+
+🔧 7.0 — Preparando datos (pipeline NB5)...
+  ✅ Train balanceado: 494,658 filas
+  ✅ Test:             3,141,740 filas
+  🛑 SparkSession detenida
+
+🔍 7.1 — Escalabilidad por volumen (64 hilos)
+
+     10% (    49,580 muestras)
+        RF:      31.0s | F1=0.8928
+        GBT:   3209.5s | F1=0.9533
+     25% (   123,652 muestras)
+        RF:      31.3s | F1=0.8966
+        GBT:   3693.4s | F1=0.9582
+     50% (   247,167 muestras)
+        RF:      38.0s | F1=0.8942
+        GBT:   4434.4s | F1=0.9587
+     75% (   371,095 muestras)
+        RF:      41.6s | F1=0.8989
+        GBT:   4645.2s | F1=0.9600
+    100% (   494,658 muestras)
+        RF:      44.6s | F1=0.8955
+        GBT:   4782.1s | F1=0.9602
+
+✅ SparkSession detenida
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/42_tiempo_vs_volumen.png
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/43_f1_vs_volumen.png
+
+🔍 7.2 — Strong Scaling (RF vs GBT)
+
+   CPU:     Intel Xeon Gold 6338
+   Cores:   32 / 64
+   Dataset: 100% train (494,658 filas)
+
+  ▶ local[8] — 8 hilos
+      RF:      64.9s | F1=0.8948
+      GBT:   3573.9s | F1=0.9596
+  ▶ local[16] — 16 hilos
+      RF:      46.9s | F1=0.8948
+      GBT:   3116.4s | F1=0.9596
+  ▶ local[32] — 32 hilos
+      RF:      39.2s | F1=0.8965
+      GBT:   3412.8s | F1=0.9612
+  ▶ local[64] — 64 hilos
+      RF:      46.5s | F1=0.8955
+      GBT:   4824.1s | F1=0.9602
+
+📊 Speedup y Eficiencia (base = 8 hilos):
+
+ n_threads  rf_time  rf_speedup  rf_eff  gbt_time  gbt_speedup  gbt_eff
+         8    64.90    1.000000  100.00   3573.87     1.000000   100.00
+        16    46.94    1.382616   69.13   3116.45     1.146776    57.34
+        32    39.15    1.657727   41.44   3412.76     1.047208    26.18
+        64    46.54    1.394499   17.43   4824.06     0.740843     9.26
+
+  📐 RF TVS Best — Amdahl:
+     Mejor speedup: 1.66× con 32 hilos
+     Paralelizable (p): 52.9%
+     Secuencial (α):    47.1%
+     Speedup máx teórico: 2.12×
+
+  📐 GBT OVR Best — Amdahl:
+     Mejor speedup: 1.15× con 16 hilos
+     Paralelizable (p): 25.6%
+     Secuencial (α):    74.4%
+     Speedup máx teórico: 1.34×
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/44_tiempo_vs_hilos.png
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/45_speedup_vs_hilos.png
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/46_eficiencia_paralela.png
+
+💾 Métricas guardadas en /home/hpc/22231088student/tfg_ids/logs/nb7_metrics.json
+  🗑️ Eliminado: /home/hpc/22231088student/tfg_ids/data/final/_temp_nb7_train
+  🗑️ Eliminado: /home/hpc/22231088student/tfg_ids/data/final/_temp_nb7_test
+
+======================================================================
+📋 RESUMEN DE ESCALABILIDAD — NB7 (RF vs GBT)
+======================================================================
+
+  Nodo: eespcachcpro01
+  CPU:  Intel Xeon Gold 6338 (32c / 64t)
+  RAM:  125 GB
+
+--- ESCALABILIDAD POR VOLUMEN (64 hilos) ---
+
+ frac      n  rf_time  rf_f1  gbt_time  gbt_f1
+ 0.10  49580    30.96 0.8928   3209.49  0.9533
+ 0.25 123652    31.34 0.8966   3693.40  0.9582
+ 0.50 247167    38.01 0.8942   4434.38  0.9587
+ 0.75 371095    41.61 0.8989   4645.19  0.9600
+ 1.00 494658    44.59 0.8955   4782.11  0.9602
+
+--- ESCALABILIDAD POR PARALELISMO (Strong Scaling) ---
+
+ n_threads  rf_time  rf_speedup  rf_eff  gbt_time  gbt_speedup  gbt_eff
+         8    64.90    1.000000  100.00   3573.87     1.000000   100.00
+        16    46.94    1.382616   69.13   3116.45     1.146776    57.34
+        32    39.15    1.657727   41.44   3412.76     1.047208    26.18
+        64    46.54    1.394499   17.43   4824.06     0.740843     9.26
+
+📝 CONCLUSIONES:
+
+
+1. VOLUMEN:
+   - RF:  datos ×10 → tiempo ×1.4
+   - GBT: datos ×10 → tiempo ×1.5
+   - Ambos sublineales ✅. GBT escala mejor en volumen porque su coste
+     está dominado por la construcción secuencial de árboles, no por el
+     tamaño del dataset.
+
+
+2. PARALELISMO:
+   - RF:  óptimo en 32 hilos (speedup 1.66×)
+   - GBT: óptimo en 16 hilos (speedup 1.15×)
+   - RF aprovecha mejor el paralelismo (árboles independientes).
+   - GBT apenas escala (boosting secuencial).
+
+
+3. AMDAHL:
+   - RF:  α=0.471 → speedup máx 2.12×
+   - GBT: α=0.744 → speedup máx 1.34×
+   - GBT tiene ~80% de fracción secuencial vs ~64% de RF.
+
+
+4. TRADE-OFF:
+   - GBT gana en F1 (+6.5 puntos) pero pierde en escalabilidad.
+   - RF es ~80× más rápido y escala mejor → apto para tiempo real.
+   - GBT → procesamiento batch donde la latencia no importa.
+
+
+5. HYPER-THREADING:
+   - Ambos modelos empeoran con 64 hilos (HT contention).
+   - RF: punto óptimo = cores físicos.
+   - GBT: punto óptimo < cores físicos (saturación antes).
+
+======================================================================
+✅ NB7 COMPLETADO
+======================================================================
+
+🛑 SparkSession cerrada
+=========================================
+Fin: Sat May 16 10:36:03 PM CEST 2026
+=========================================

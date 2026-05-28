@@ -1,0 +1,196 @@
+=========================================
+Job ID: 265
+Nodo:   eespcachcpro01
+Inicio: Mon May 11 01:26:35 PM CEST 2026
+=========================================
+📊 Dataset cargado desde /home/hpc/22231088student/tfg_ids/data/final/dataset_final:
+  Filas:    15,705,438
+  Clases:   15
+  Columnas: 47
+  Features: 45
+🔧 Creando vector de features...
+  ✅ Vector 'features_raw' creado (45 dimensiones)
+🔍 Split estratificado train/test (80/20)...
+  Train: 12,563,698 (80.0%)
+  Test:  3,141,740 (20.0%)
+
+  Distribución por clase en train:
++------------------------+--------+
+|Label                   |count   |
++------------------------+--------+
+|Benign                  |10680999|
+|DDoS attack-HOIC        |535030  |
+|DDoS attacks-LOIC-HTTP  |461373  |
+|DoS attacks-Hulk        |347885  |
+|Bot                     |225295  |
+|Infilteration           |128518  |
+|SSH-Bruteforce          |94081   |
+|DoS attacks-GoldenEye   |33000   |
+|FTP-BruteForce          |31560   |
+|DoS attacks-SlowHTTPTest|15609   |
+|DoS attacks-Slowloris   |8206    |
+|DDoS attack-LOIC-UDP    |1396    |
+|Brute Force -Web        |490     |
+|Brute Force -XSS        |183     |
+|SQL Injection           |73      |
++------------------------+--------+
+
+🔧 Escalando features (fit solo en train)...
+  ✅ StandardScaler aplicado
+     Fit en train (12,563,698 filas)
+     Transform en train + test
+🔍 Balanceo de clases (solo train)...
+
+  Distribución ANTES del balanceo:
+                   Label  label_index    count
+                  Benign          0.0 10680999
+        DDoS attack-HOIC          1.0   535030
+  DDoS attacks-LOIC-HTTP          2.0   461373
+        DoS attacks-Hulk          3.0   347885
+                     Bot          4.0   225295
+           Infilteration          5.0   128518
+          SSH-Bruteforce          6.0    94081
+   DoS attacks-GoldenEye          7.0    33000
+          FTP-BruteForce          8.0    31560
+DoS attacks-SlowHTTPTest          9.0    15609
+   DoS attacks-Slowloris         10.0     8206
+    DDoS attack-LOIC-UDP         11.0     1396
+        Brute Force -Web         12.0      490
+        Brute Force -XSS         13.0      183
+           SQL Injection         14.0       73
+
+  Tamaño objetivo (mediana): 33,000
+
+  Train tras balanceo: 494,658
+
+  Distribución DESPUÉS del balanceo:
++------------------------+-----+
+|Label                   |count|
++------------------------+-----+
+|Bot                     |33387|
+|SSH-Bruteforce          |33287|
+|Infilteration           |33250|
+|DoS attacks-Hulk        |33058|
+|DDoS attack-HOIC        |33057|
+|Brute Force -XSS        |33028|
+|DoS attacks-GoldenEye   |33000|
+|DDoS attacks-LOIC-HTTP  |32975|
+|Benign                  |32973|
+|Brute Force -Web        |32838|
+|SQL Injection           |32804|
+|DoS attacks-SlowHTTPTest|32768|
+|DoS attacks-Slowloris   |32763|
+|FTP-BruteForce          |32757|
+|DDoS attack-LOIC-UDP    |32713|
++------------------------+-----+
+
+  💾 Figura guardada: /home/hpc/22231088student/tfg_ids/figures/33_balanceo_antes_despues.png
+🌲 Random Forest — Base...
+  Accuracy: 0.8295
+  F1-score: 0.8949
+  Tiempo:   391.5s
+
+🌲 Random Forest — TrainValidationSplit...
+  Combinaciones: 8 × 1 = 8 entrenamientos
+
+  Mejor RF:
+    numTrees:              200
+    maxDepth:              10
+    featureSubsetStrategy: sqrt
+    Accuracy: 0.8305
+    F1-score: 0.8955
+    Tiempo TVS: 2105.2s
+
+  Métricas de validación por combinación:
+    Combo 1: F1=0.9764
+    Combo 2: F1=0.9752
+    Combo 3: F1=0.9836
+    Combo 4: F1=0.9835
+    Combo 5: F1=0.9787
+    Combo 6: F1=0.9746
+    Combo 7: F1=0.9845
+    Combo 8: F1=0.9833
+  💾 Modelo RF guardado
+🌳 GBT — Base (OneVsRest)...
+  Accuracy: 0.8805
+  F1-score: 0.9263
+  Tiempo:   30531.4s
+
+🌳 GBT — Tuning Manual (OneVsRest)...
+  Combinaciones: 8
+
+  [1/8] maxIter=50, maxDepth=5, stepSize=0.05
+    F1 (val): 0.9852  Tiempo: 10783.4s
+
+  [2/8] maxIter=50, maxDepth=5, stepSize=0.1
+    F1 (val): 0.9888  Tiempo: 10652.5s
+
+  [3/8] maxIter=50, maxDepth=8, stepSize=0.05
+    F1 (val): 0.9930  Tiempo: 15764.4s
+
+  [4/8] maxIter=50, maxDepth=8, stepSize=0.1
+    F1 (val): 0.9934  Tiempo: 15485.7s
+
+  [5/8] maxIter=100, maxDepth=5, stepSize=0.05
+    F1 (val): 0.9886  Tiempo: 21709.2s
+
+  [6/8] maxIter=100, maxDepth=5, stepSize=0.1
+    F1 (val): 0.9906  Tiempo: 21667.2s
+
+  [7/8] maxIter=100, maxDepth=8, stepSize=0.05
+    F1 (val): 0.9934  Tiempo: 32303.4s
+
+  [8/8] maxIter=100, maxDepth=8, stepSize=0.1
+    F1 (val): 0.9941  Tiempo: 32035.2s
+
+  Resultados de todas las combinaciones:
+ maxIter  maxDepth  stepSize   f1_val     tiempo_s
+     100         8      0.10 0.994087 32035.249503
+      50         8      0.10 0.993415 15485.654822
+     100         8      0.05 0.993407 32303.370950
+      50         8      0.05 0.993021 15764.386956
+     100         5      0.10 0.990578 21667.246669
+      50         5      0.10 0.988821 10652.486268
+     100         5      0.05 0.988631 21709.212028
+      50         5      0.05 0.985242 10783.365623
+
+  🏆 Mejor GBT (OneVsRest):
+    maxIter:  100
+    maxDepth: 8
+    stepSize: 0.1
+    F1 (val):  0.9941
+    F1 (test): 0.9601
+    Accuracy:  0.9384
+    Tiempo total tuning: 160401.0s
+  💾 Modelo GBT guardado
+
+======================================================================
+📋 RESUMEN DE ENTRENAMIENTO — NB5
+======================================================================
+
+  Dataset:  15,705,438 filas, 45 features, 15 clases
+  Train:    12,563,698 → balanceado: 494,658
+  Test:     3,141,740 (distribución real, sin balancear)
+  Tuning RF:  TrainValidationSplit (trainRatio=0.75, 8 combos)
+  Tuning GBT: Loop manual + OneVsRest (trainRatio=0.75, 8 combos × 15 clases)
+
+  Resultados (evaluados en TEST):
+
+      modelo  accuracy       f1      tiempo_s
+GBT OVR Best  0.938407 0.960140 160400.972819
+GBT OVR Base  0.880483 0.926284  30531.402655
+ RF TVS Best  0.830520 0.895511   2105.155758
+     RF Base  0.829465 0.894855    391.507839
+
+  💾 Métricas guardadas en /home/hpc/22231088student/tfg_ids/logs/nb5_metrics.json
+
+  🏆 Mejor modelo: GBT OVR Best (F1=0.9601)
+
+======================================================================
+✅ NB5 COMPLETADO
+======================================================================
+
+🛑 SparkSession cerrada
+=========================================
+Fin: Wed May 13 07:42:35 PM CEST 2026
+=========================================

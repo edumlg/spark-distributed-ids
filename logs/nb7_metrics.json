@@ -1,0 +1,99 @@
+{
+  "modelos": [
+    "RF TVS Best",
+    "GBT OVR Best"
+  ],
+  "rf_params": {
+    "numTrees": 200,
+    "maxDepth": 10,
+    "featureSubsetStrategy": "sqrt",
+    "maxBins": 16
+  },
+  "gbt_params": {
+    "maxIter": 100,
+    "maxDepth": 8,
+    "stepSize": 0.1
+  },
+  "volumen": [
+    {
+      "frac": 0.1,
+      "n": 49580,
+      "rf_time": 30.96,
+      "rf_f1": 0.8928,
+      "gbt_time": 3209.49,
+      "gbt_f1": 0.9533
+    },
+    {
+      "frac": 0.25,
+      "n": 123652,
+      "rf_time": 31.34,
+      "rf_f1": 0.8966,
+      "gbt_time": 3693.4,
+      "gbt_f1": 0.9582
+    },
+    {
+      "frac": 0.5,
+      "n": 247167,
+      "rf_time": 38.01,
+      "rf_f1": 0.8942,
+      "gbt_time": 4434.38,
+      "gbt_f1": 0.9587
+    },
+    {
+      "frac": 0.75,
+      "n": 371095,
+      "rf_time": 41.61,
+      "rf_f1": 0.8989,
+      "gbt_time": 4645.19,
+      "gbt_f1": 0.96
+    },
+    {
+      "frac": 1.0,
+      "n": 494658,
+      "rf_time": 44.59,
+      "rf_f1": 0.8955,
+      "gbt_time": 4782.11,
+      "gbt_f1": 0.9602
+    }
+  ],
+  "hilos": [
+    {
+      "n_threads": 8,
+      "rf_time": 64.9,
+      "rf_f1": 0.8948,
+      "gbt_time": 3573.87,
+      "gbt_f1": 0.9596
+    },
+    {
+      "n_threads": 16,
+      "rf_time": 46.94,
+      "rf_f1": 0.8948,
+      "gbt_time": 3116.45,
+      "gbt_f1": 0.9596
+    },
+    {
+      "n_threads": 32,
+      "rf_time": 39.15,
+      "rf_f1": 0.8965,
+      "gbt_time": 3412.76,
+      "gbt_f1": 0.9612
+    },
+    {
+      "n_threads": 64,
+      "rf_time": 46.54,
+      "rf_f1": 0.8955,
+      "gbt_time": 4824.06,
+      "gbt_f1": 0.9602
+    }
+  ],
+  "amdahl_rf": {
+    "p": 0.529,
+    "alpha": 0.471,
+    "max_speedup": 2.12
+  },
+  "amdahl_gbt": {
+    "p": 0.256,
+    "alpha": 0.744,
+    "max_speedup": 1.34
+  }
+}
