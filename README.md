@@ -117,7 +117,7 @@ Si este proyecto te ha resultado útil en tu investigación o trabajo, por favor
 ```text
 Morillas Rodríguez, E. (2026). Distributed IDS with Apache Spark: detección de
 intrusiones a gran escala mediante Ensemble Learning [Software]. GitHub.
-https://github.com/[USUARIO]/[NOMBRE-REPO]
+https://github.com/edumlg/spark-distributed-ids
 ```
 
 ---
