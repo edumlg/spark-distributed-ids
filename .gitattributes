@@ -1,0 +1,3 @@
+# Indicar a GitHub Linguist que ignore los gráficos HTML interactivos del cómputo de lenguajes
+figures/**/*.html linguist-generated=true
+figures/*.html linguist-generated=true
