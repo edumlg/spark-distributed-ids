@@ -87,8 +87,20 @@ Los modelos pesados (especialmente GBT OVR) requieren una cantidad sustancial de
 El pipeline está diseñado de forma secuencial, donde cada etapa lee la salida de formato Parquet generada por la anterior:
 
 ```
-nb1_ingesta ──> nb2_eda ──> nb3_limpieza ──> nb4_feature_engineering ──> nb5_entrenamiento ──> nb6_evaluacion
-                                                                   └──> nb7_escalabilidad
+  [nb1_ingesta] (Capa Bronce)
+        │
+        ▼
+    [nb2_eda] (EDA y Visualización)
+        │
+        ▼
+  [nb3_limpieza] (Capa Plata)
+        │
+        ▼
+[nb4_feature_engineering] (Capa Oro)
+        │
+        ├──► [nb5_entrenamiento] (Modelos RF/GBT) ──► [nb6_evaluacion] (Resultados)
+        │
+        └──► [nb7_escabilidad] (Pruebas de Escalabilidad)
 ```
 
 ### Ejecución interactiva
